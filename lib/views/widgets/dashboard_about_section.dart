@@ -51,7 +51,7 @@ class DashboardAboutSection extends StatelessWidget {
                     Positioned(
                       bottom: 18.0,
                       child: Image.asset(
-                        AppImages.aizan2,
+                        AppImages.aizan,
                         height: 450.0,
                         width: 450.0,
                       ),

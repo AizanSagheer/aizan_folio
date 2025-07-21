@@ -1,10 +1,9 @@
 class AppImages {
-   static const String aizan = 'assets/images/aizan_pic.png';
-
+ 
    static const String github = 'assets/images/github.svg';
   static const String linkedin = 'assets/images/linkedin.svg';
   static const String stackoverflow = 'assets/images/stackoverflow.svg';
-  static const String aizan2 = 'assets/images/aizan_2.png';
+  static const String aizan = 'assets/images/aizan.png';
   static const String flutterLogo = 'assets/images/flutter_logo.svg';
   static const String package = 'assets/images/package.svg';
   static const String firebase = 'assets/images/firebase.svg';
