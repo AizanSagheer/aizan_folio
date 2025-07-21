@@ -4,7 +4,6 @@ import 'package:aizan_folio/views/widgets/social_icon.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../utils/colors.dart';
 import '../../utils/images.dart';
 
@@ -76,7 +75,7 @@ class FooterWidget extends StatelessWidget {
             children: [
               Text(
                 'Built using ',
-                style: GoogleFonts.k2d(
+                style: TextStyle(
                   color: AppColors().textColor.withOpacity(0.7),
                   fontSize: 14,
                 ),
@@ -87,7 +86,7 @@ class FooterWidget extends StatelessWidget {
               ),
               Text(
                 ' with ',
-                style: GoogleFonts.k2d(
+                style: TextStyle(
                   color: AppColors().textColor.withOpacity(0.7),
                   fontSize: 14,
                 ),
@@ -102,7 +101,7 @@ class FooterWidget extends StatelessWidget {
           const SizedBox(height: 20),
           Text(
             'Copyright © 2025 Aizan. All rights reserved.',
-            style: GoogleFonts.k2d(
+            style: TextStyle(
               color: AppColors().textColor.withOpacity(0.7),
               fontSize: 14,
             ),
@@ -135,7 +134,7 @@ class _ContactInfo extends StatelessWidget {
         const SizedBox(width: 8.0),
         Text(
           text,
-          style: GoogleFonts.k2d(
+          style: TextStyle(
             color: AppColors().textColor.withOpacity(0.7),
             fontSize: 16,
           ),

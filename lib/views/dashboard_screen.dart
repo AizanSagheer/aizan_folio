@@ -11,7 +11,6 @@ import 'widgets/custom_outlined_button.dart';
 import 'widgets/responsive_widget.dart';
 import 'widgets/profile_photo_with_circle.dart';
 import 'widgets/rectangle_painter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'widgets/dashboard_drawer.dart';
 import 'widgets/contact_section.dart';
 import 'widgets/section_title.dart';
@@ -145,7 +144,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 children: [
                                   TextSpan(
                                     text: 'Hello, I am\n',
-                                    style: GoogleFonts.k2d(
+                                    style: TextStyle(
                                       color: AppColors().textColor,
                                       fontSize: 24,
                                       fontWeight: FontWeight.w400,
@@ -153,7 +152,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   ),
                                   TextSpan(
                                     text: 'Aizan Sagheer\n',
-                                    style: GoogleFonts.k2d(
+                                    style: TextStyle(
                                       color: AppColors().textColor,
                                       fontSize: 30,
                                       fontWeight: FontWeight.bold,
@@ -161,7 +160,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   ),
                                   TextSpan(
                                     text: 'Flutter Developer',
-                                    style: GoogleFonts.k2d(
+                                    style: TextStyle(
                                       color: AppColors().secondaryColor,
                                       fontSize: 45,
                                       fontWeight: FontWeight.w500,
@@ -226,7 +225,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     SizedBox(height: 20),
                     Text(
                       'Programmer of visual things. Interpolation enthusiast. Matrix advocate. Professional amateur. Able to create bugs in many languages',
-                      style: GoogleFonts.k2d(
+                      style: TextStyle(
                         color: AppColors().whiteColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
@@ -266,7 +265,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           Expanded(
                             child: Text(
                               'I\'m a Flutter developer with 5 years of experience building cross-platform apps for Android, iOS, web, Windows, and macOS. I specialise in clean design patterns, robust optimisation, and creating smooth, reliable user experiences — from IoT integrations and real-time sockets to secure payments with Stripe, Google Pay, and Apple Pay. I\'ve scaled and migrated native Android apps to Flutter, implemented offline-first functionality with Hive, and fine-tuned performance to cut crashes and render times by up to 60%. I believe in writing secure, maintainable code, using modern tools like DevTools, Fastlane, FFI, and native Kotlin when needed. I love working with cross-functional teams to deliver polished apps that users trust — and I\'m always learning to keep my skills sharp.',
-                              style: GoogleFonts.k2d(
+                              style: TextStyle(
                                 color: AppColors().whiteColor,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
@@ -299,7 +298,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     SizedBox(height: 40),
                     Center(
                       child: Text('Portfolio',
-                          style: GoogleFonts.k2d(
+                          style: TextStyle(
                             color: AppColors().whiteColor,
                             fontSize: 30,
                             fontWeight: FontWeight.w500,
@@ -331,7 +330,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         children: [
                           Center(
                             child: Text('Contact Me',
-                                style: GoogleFonts.k2d(
+                                style: TextStyle(
                                   color: AppColors().whiteColor,
                                   fontSize: 30,
                                   fontWeight: FontWeight.w500,
@@ -340,7 +339,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           SizedBox(height: 40),
                           Text(
                             'Say Hello! or have any questions?',
-                            style: GoogleFonts.k2d(
+                            style: TextStyle(
                               color: AppColors().whiteColor,
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
@@ -350,7 +349,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ContactFormWidget(),
                           Center(
                             child: Text('Or',
-                                style: GoogleFonts.k2d(
+                                style: TextStyle(
                                   color: AppColors().whiteColor,
                                   fontSize: 30,
                                   fontWeight: FontWeight.w500,
@@ -390,7 +389,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     children: [
                       TextSpan(
                         text: 'Hello, I am\n',
-                        style: GoogleFonts.k2d(
+                        style: TextStyle(
                           color: AppColors().textColor,
                           fontSize: 18,
                           fontWeight: FontWeight.w400,
@@ -398,7 +397,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       TextSpan(
                         text: 'Aizan Sagheer\n',
-                        style: GoogleFonts.k2d(
+                        style: TextStyle(
                           color: AppColors().textColor,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -406,7 +405,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ),
                       TextSpan(
                         text: 'Flutter Developer',
-                        style: GoogleFonts.k2d(
+                        style: TextStyle(
                           color: AppColors().secondaryColor,
                           fontSize: 28,
                           fontWeight: FontWeight.w500,
@@ -518,7 +517,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       SizedBox(height: 16),
                       Text(
                         "I'm a Flutter developer with 5 years of experience building cross-platform apps for Android, iOS, web, Windows, and macOS. I specialise in clean design patterns, robust optimisation, and creating smooth, reliable user experiences — from IoT integrations and real-time sockets to secure payments with Stripe, Google Pay, and Apple Pay. I've scaled and migrated native Android apps to Flutter, implemented offline-first functionality with Hive, and fine-tuned performance to cut crashes and render times by up to 60%. I believe in writing secure, maintainable code, using modern tools like DevTools, Fastlane, FFI, and native Kotlin when needed. I love working with cross-functional teams to deliver polished apps that users trust — and I'm always learning to keep my skills sharp.",
-                        style: GoogleFonts.k2d(
+                        style: TextStyle(
                           color: AppColors().whiteColor,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
@@ -603,7 +602,7 @@ class StatItem extends StatelessWidget {
       children: [
         Text(
           count,
-          style: GoogleFonts.k2d(
+          style: TextStyle(
             color: AppColors().secondaryColor,
             fontSize: 32,
             fontWeight: FontWeight.bold,
@@ -611,7 +610,7 @@ class StatItem extends StatelessWidget {
         ),
         Text(
           label,
-          style: GoogleFonts.k2d(
+          style: TextStyle(
             color: AppColors().whiteColor,
             fontSize: 16,
             fontWeight: FontWeight.w500,

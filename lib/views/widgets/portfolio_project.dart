@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../utils/colors.dart';
 
 class PortfolioProject extends StatefulWidget {
@@ -123,7 +122,7 @@ class _PortfolioProjectState extends State<PortfolioProject>
               child: Text(
                 widget.projectName,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.k2d(
+                style: TextStyle(
                   color: AppColors().whiteColor,
                   fontSize: 18,
                   fontWeight: FontWeight.w500,
@@ -156,7 +155,7 @@ class _PortfolioProjectState extends State<PortfolioProject>
           padding: const EdgeInsets.all(24.0),
           child: Text(
             widget.description,
-            style: GoogleFonts.k2d(
+            style: TextStyle(
               color: AppColors().whiteColor,
               fontSize: 16,
               fontWeight: FontWeight.w400,

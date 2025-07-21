@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../utils/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ShimmerLogo extends StatefulWidget {
   const ShimmerLogo({super.key});
@@ -47,11 +46,6 @@ class _ShimmerLogoState extends State<ShimmerLogo>
           },
           child: Text(
             'Aizan.',
-            style: GoogleFonts.k2d(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
           ),
         );
       },

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../utils/colors.dart';
 import '../../models/portfolio_project.dart' as model;
 import 'portfolio_project.dart';
@@ -16,7 +15,7 @@ class DashboardPortfolioSection extends StatelessWidget {
       children: [
         Center(
           child: Text('Portfolio',
-              style: GoogleFonts.k2d(
+              style: TextStyle(
                 color: AppColors().whiteColor,
                 fontSize: 30,
                 fontWeight: FontWeight.w500,

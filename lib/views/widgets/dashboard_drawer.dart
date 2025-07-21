@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../utils/colors.dart';
 
 class DashboardDrawer extends StatelessWidget {
@@ -29,7 +28,7 @@ class DashboardDrawer extends StatelessWidget {
               ),
               child: Text(
                 'Aizan.',
-                style: GoogleFonts.k2d(
+                style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,

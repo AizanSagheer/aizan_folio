@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'views/dashboard_screen.dart';
 import 'package:aizan_folio/utils/colors.dart';
 import 'views/not_found_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,10 +33,8 @@ class MyApp extends StatelessWidget {
             }),
           ),
         ),
-        textTheme: TextTheme(
-          bodyLarge: TextStyle(color: AppColors().textColor),
-          bodyMedium: TextStyle(color: AppColors().textColor),
-          bodySmall: TextStyle(color: AppColors().textColor),
+        textTheme: GoogleFonts.k2dTextTheme(
+          Theme.of(context).textTheme,
         ),
         appBarTheme: AppBarTheme(
           backgroundColor: AppColors().primaryColor,
