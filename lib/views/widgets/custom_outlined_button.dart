@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../utils/colors.dart';
 
 class CustomOutlinedButton extends StatefulWidget {
@@ -53,7 +52,7 @@ class _CustomOutlinedButtonState extends State<CustomOutlinedButton> {
                 )
               : Text(
                   widget.text,
-                  style: GoogleFonts.k2d(
+                  style: TextStyle(
                     color: isHovered ? Colors.white : AppColors().textColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w500,

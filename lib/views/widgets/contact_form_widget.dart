@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../utils/colors.dart';
 import 'custom_outlined_button.dart';
 import '../../controllers/contact_controller.dart';
@@ -52,7 +51,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
   InputDecoration _getInputDecoration(String label) {
     return InputDecoration(
       labelText: label,
-      labelStyle: GoogleFonts.k2d(
+      labelStyle: TextStyle(
         color: AppColors().textColor.withOpacity(0.7),
       ),
       enabledBorder: OutlineInputBorder(
@@ -97,21 +96,21 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
             TextFormField(
               controller: _nameController,
               decoration: _getInputDecoration('Name'),
-              style: GoogleFonts.k2d(color: AppColors().textColor),
+              style: TextStyle(color: AppColors().textColor),
               validator: (value) => value!.isEmpty ? 'Enter your name' : null,
             ),
             const SizedBox(height: 20),
             TextFormField(
               controller: _emailController,
               decoration: _getInputDecoration('Email'),
-              style: GoogleFonts.k2d(color: AppColors().textColor),
+              style: TextStyle(color: AppColors().textColor),
               validator: (value) => value!.isEmpty ? 'Enter your email' : null,
             ),
             const SizedBox(height: 20),
             TextFormField(
               controller: _messageController,
               decoration: _getInputDecoration('Message'),
-              style: GoogleFonts.k2d(color: AppColors().textColor),
+              style: TextStyle(color: AppColors().textColor),
               maxLines: 5,
               validator: (value) => value!.isEmpty ? 'Enter a message' : null,
             ),
@@ -128,7 +127,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
               Center(
                 child: Text(
                   _statusMessage!,
-                  style: GoogleFonts.k2d(
+                  style: TextStyle(
                     color: _statusMessage!.contains('success')
                         ? AppColors().secondaryColor
                         : Colors.red,

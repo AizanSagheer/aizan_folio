@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../utils/colors.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -90,7 +89,7 @@ class _SkillItemState extends State<SkillItem>
                   SizedBox(height: 16),
                   Text(
                     '${_animation.value.toInt()}%',
-                    style: GoogleFonts.k2d(
+                    style: TextStyle(
                       color: AppColors().secondaryColor,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -104,7 +103,7 @@ class _SkillItemState extends State<SkillItem>
         SizedBox(height: 8),
         Text(
           widget.skillName,
-          style: GoogleFonts.k2d(
+          style: TextStyle(
             color: Colors.grey[400],
             fontSize: 16,
             fontWeight: FontWeight.w500,

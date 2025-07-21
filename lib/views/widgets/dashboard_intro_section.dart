@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../utils/colors.dart';
 import '../../utils/images.dart';
 import 'social_icon.dart';
@@ -24,7 +23,7 @@ class DashboardIntroSection extends StatelessWidget {
         SizedBox(height: isMobile ? 24 : 90),
         Text(
           'Hello, I am',
-          style: GoogleFonts.k2d(
+          style: TextStyle(
             color: AppColors().textColor,
             fontSize: isMobile ? 18 : 24,
             fontWeight: FontWeight.w400,
@@ -32,7 +31,7 @@ class DashboardIntroSection extends StatelessWidget {
         ),
         Text(
           'Aizan Sagheer',
-          style: GoogleFonts.k2d(
+          style: TextStyle(
             color: AppColors().textColor,
             fontSize: isMobile ? 22 : 30,
             fontWeight: FontWeight.bold,
@@ -40,7 +39,7 @@ class DashboardIntroSection extends StatelessWidget {
         ),
         Text(
           'Flutter Developer',
-          style: GoogleFonts.k2d(
+          style: TextStyle(
             color: AppColors().secondaryColor,
             fontSize: isMobile ? 28 : 45,
             fontWeight: FontWeight.w500,
@@ -132,7 +131,7 @@ class _StatItem extends StatelessWidget {
       children: [
         Text(
           count,
-          style: GoogleFonts.k2d(
+          style: TextStyle(
             color: AppColors().secondaryColor,
             fontSize: 32,
             fontWeight: FontWeight.bold,
@@ -140,7 +139,7 @@ class _StatItem extends StatelessWidget {
         ),
         Text(
           label,
-          style: GoogleFonts.k2d(
+          style: TextStyle(
             color: AppColors().whiteColor,
             fontSize: 16,
             fontWeight: FontWeight.w500,
