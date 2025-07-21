@@ -254,7 +254,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 Positioned(
                                   bottom: 18,
                                   child: Image.asset(
-                                    AppImages.aizan2,
+                                    AppImages.aizan,
                                     height: 450.0,
                                     width: 450.0,
                                   ),
@@ -477,8 +477,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SectionTitle(title: 'About Me'),
-                      SizedBox(height: 24),
                       Center(
                         child: LayoutBuilder(
                           builder: (context, constraints) {
@@ -505,7 +503,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   Positioned(
                                     bottom: 10,
                                     child: Image.asset(
-                                      AppImages.aizan2,
+                                      AppImages.aizan,
                                       height: photoSize + 33,
                                       width: photoSize,
                                       fit: BoxFit.cover,

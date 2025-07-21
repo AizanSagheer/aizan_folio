@@ -35,7 +35,7 @@ class DashboardProfilePhoto extends StatelessWidget {
                   Positioned(
                     bottom: 10,
                     child: Image.asset(
-                      AppImages.aizan2,
+                      AppImages.aizan,
                       height: photoSize + 33,
                       width: photoSize,
                       fit: BoxFit.cover,

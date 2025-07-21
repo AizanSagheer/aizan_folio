@@ -1,5 +1,9 @@
 # aizan_folio
 
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/AizanSagheer/aizan_folio)
+
+**Repository:** [https://github.com/AizanSagheer/aizan_folio.git](https://github.com/AizanSagheer/aizan_folio.git)
+
 A professional cross-platform portfolio app built with Flutter, showcasing the skills, projects, and contact information of Aizan Sagheer (Flutter Developer).
 
 ## Features
@@ -13,6 +17,25 @@ A professional cross-platform portfolio app built with Flutter, showcasing the s
 - **Social Links**: Quick access to LinkedIn, GitHub, and Stack Overflow profiles.
 - **Modern UI**: Clean, visually appealing design using custom themes and Google Fonts.
 
+## Screenshots
+
+### Dashboard (Desktop)
+![Dashboard Desktop](assets/screenshots/dashboard_desktop.png)
+
+### About Me Section (Desktop)
+![About Me Desktop](assets/screenshots/desktop_about_me.png)
+
+### Portfolio Section (Desktop)
+![Portfolio Desktop](assets/screenshots/portfolio_desktop.png)
+
+### Footer (Desktop)
+![Footer Desktop](assets/screenshots/footer_desktop.png)
+
+### Drawer (Mobile)
+![Drawer Mobile](assets/screenshots/drawer_mobile.png)
+
+### Dashboard (Mobile)
+![Dashboard Mobile](assets/screenshots/desktop_mobile.png)
 
 ## Getting Started
 
@@ -41,6 +64,8 @@ To run on the web:
 ```bash
 flutter run -d chrome
 ```
+
+> **Note:** This app has been tested on Desktop web only.
 
 ## Project Structure
 
