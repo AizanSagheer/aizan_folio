@@ -208,7 +208,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         AppColors().textColor.withOpacity(0.5),
                                   ),
                                   StatItem(
-                                      count: '10+', label: 'Happy Clients'),
+                                      count: '1 M+', label: 'users served'),
                                 ],
                               ),
                             ),
@@ -461,7 +461,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         width: 1,
                         color: AppColors().textColor.withOpacity(0.5),
                       ),
-                      StatItem(count: '10+', label: 'Happy Clients'),
+                      StatItem(count: '1 M+', label: 'users served'),
                     ],
                   ),
                 ),

@@ -112,7 +112,7 @@ class _DashboardStatsRow extends StatelessWidget {
                 isMobile ? null : const EdgeInsets.symmetric(horizontal: 24),
             color: AppColors().textColor.withOpacity(0.5),
           ),
-          _StatItem(count: '10+', label: 'Happy Clients'),
+          _StatItem(count: '1 M+', label: 'users served'),
         ],
       ),
     );
