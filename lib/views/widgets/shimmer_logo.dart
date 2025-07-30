@@ -37,7 +37,7 @@ class _ShimmerLogoState extends State<ShimmerLogo>
             return LinearGradient(
               colors: [
                 AppColors().secondaryColor,
-                AppColors().redColor.withOpacity(0.5),
+                AppColors().whiteColor,
                 AppColors().secondaryColor,
               ],
               begin: Alignment(-1.0 + 2.0 * _controller.value, 0),
@@ -46,6 +46,11 @@ class _ShimmerLogoState extends State<ShimmerLogo>
           },
           child: Text(
             'Aizan.',
+            style: TextStyle(
+              color: AppColors().whiteColor,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         );
       },
