@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/colors.dart';
+import '../../utils/external_links.dart';
 import 'custom_outlined_button.dart';
-import '../../controllers/contact_controller.dart';
-import '../../models/contact_form_data.dart';
 
 class ContactFormWidget extends StatefulWidget {
   const ContactFormWidget({super.key});
@@ -16,36 +16,75 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _messageController = TextEditingController();
-  final ContactController _controller = ContactController();
 
-  bool _isSending = false;
-  String? _statusMessage;
+  final _isSending = ValueNotifier<bool>(false);
+  final _statusMessage = ValueNotifier<String?>(null);
+
+  @override
+  void dispose() {
+    _isSending.dispose();
+    _statusMessage.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
 
   Future<void> _submitForm() async {
     if (!_formKey.currentState!.validate()) return;
-    setState(() {
-      _isSending = true;
-      _statusMessage = null;
-    });
-    final formData = ContactFormData(
-      name: _nameController.text,
-      email: _emailController.text,
-      message: _messageController.text,
-    );
-    final result = await _controller.submitContactForm(
-      formData.name,
-      formData.email,
-      formData.message,
-    );
-    setState(() {
-      _isSending = false;
-      _statusMessage = result;
-      if (result.contains('success')) {
-        _nameController.clear();
-        _emailController.clear();
-        _messageController.clear();
+    
+    _isSending.value = true;
+    _statusMessage.value = null;
+
+    try {
+      final name = _nameController.text.trim();
+      final email = _emailController.text.trim();
+      final message = _messageController.text.trim();
+      
+      // Create subject with sender's name
+      final subject = 'Contact from Portfolio - $name';
+      
+      // Create email body with sender info and message
+      final body = '''Hello Aizan,
+
+My name is $name and my email is $email.
+
+$message
+
+Best regards,
+$name''';
+
+      // Encode the URI components
+      final Uri emailUri = Uri(
+        scheme: 'mailto',
+        path: ExternalLinks.email,
+        queryParameters: {
+          'subject': subject,
+          'body': body,
+        },
+      );
+
+      if (await canLaunchUrl(emailUri)) {
+        await launchUrl(emailUri);
+        _isSending.value = false;
+        _statusMessage.value = 'Opening email client...';
+        // Clear form after a short delay
+        Future.delayed(const Duration(seconds: 1), () {
+          if (mounted) {
+            _nameController.clear();
+            _emailController.clear();
+            _messageController.clear();
+            _statusMessage.value = null;
+          }
+        });
+      } else {
+        _isSending.value = false;
+        _statusMessage.value = 'Could not open email client. Please try again.';
       }
-    });
+    } catch (e) {
+      _isSending.value = false;
+      _statusMessage.value = 'An error occurred. Please try again.';
+    }
   }
 
   InputDecoration _getInputDecoration(String label) {
@@ -104,7 +143,16 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
               controller: _emailController,
               decoration: _getInputDecoration('Email'),
               style: TextStyle(color: AppColors().textColor),
-              validator: (value) => value!.isEmpty ? 'Enter your email' : null,
+              keyboardType: TextInputType.emailAddress,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Enter your email';
+                }
+                if (!value.contains('@') || !value.contains('.')) {
+                  return 'Enter a valid email address';
+                }
+                return null;
+              },
             ),
             const SizedBox(height: 20),
             TextFormField(
@@ -116,26 +164,40 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
             ),
             const SizedBox(height: 30),
             Center(
-              child: CustomOutlinedButton(
-                text: 'Send Message',
-                onPressed: _submitForm,
-                isLoading: _isSending,
+              child: ValueListenableBuilder<bool>(
+                valueListenable: _isSending,
+                builder: (context, isSending, child) {
+                  return CustomOutlinedButton(
+                    text: 'Send Message',
+                    onPressed: _submitForm,
+                    isLoading: isSending,
+                  );
+                },
               ),
             ),
-            if (_statusMessage != null) ...[
-              const SizedBox(height: 20),
-              Center(
-                child: Text(
-                  _statusMessage!,
-                  style: TextStyle(
-                    color: _statusMessage!.contains('success')
-                        ? AppColors().secondaryColor
-                        : Colors.red,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-            ],
+            ValueListenableBuilder<String?>(
+              valueListenable: _statusMessage,
+              builder: (context, statusMessage, child) {
+                if (statusMessage == null) return const SizedBox.shrink();
+                return Column(
+                  children: [
+                    const SizedBox(height: 20),
+                    Center(
+                      child: Text(
+                        statusMessage,
+                        style: TextStyle(
+                          color: statusMessage.contains('Opening') || 
+                                 statusMessage.contains('success')
+                            ? AppColors().secondaryColor
+                            : Colors.red,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
           ],
         ),
       ),
