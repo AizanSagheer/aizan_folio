@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../controllers/dashboard_controller.dart';
 import '../utils/colors.dart';
+import '../utils/external_links.dart';
 import '../utils/images.dart';
 import 'widgets/contact_form_widget.dart';
 import 'widgets/footer_widget.dart';
@@ -359,7 +361,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           Center(
                             child: CustomOutlinedButton(
                               text: 'Email me directly',
-                              onPressed: () {},
+                              onPressed: () async {
+                                final Uri emailUri = Uri(
+                                  scheme: 'mailto',
+                                  path: ExternalLinks.email,
+                                );
+                                if (await canLaunchUrl(emailUri)) {
+                                  await launchUrl(emailUri);
+                                }
+                              },
                             ),
                           ),
                           SizedBox(height: 40),
