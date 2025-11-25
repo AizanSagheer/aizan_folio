@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/colors.dart';
+import '../../utils/external_links.dart';
 import 'contact_form_widget.dart';
 import 'custom_outlined_button.dart';
 
@@ -44,7 +46,15 @@ class DashboardContactSection extends StatelessWidget {
           Center(
             child: CustomOutlinedButton(
               text: 'Email me directly',
-              onPressed: () {},
+              onPressed: () async {
+                final Uri emailUri = Uri(
+                  scheme: 'mailto',
+                  path: ExternalLinks.email,
+                );
+                if (await canLaunchUrl(emailUri)) {
+                  await launchUrl(emailUri);
+                }
+              },
             ),
           ),
           SizedBox(height: 40.0),
