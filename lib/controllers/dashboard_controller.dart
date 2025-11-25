@@ -1,8 +1,8 @@
 import '../models/portfolio_project.dart';
 import '../models/skill.dart';
 import '../utils/images.dart';
-import 'package:flutter/services.dart';
-import 'package:universal_html/html.dart' as html;
+import '../utils/external_links.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DashboardController {
    List<Skill> getSkills() {
@@ -87,24 +87,17 @@ class DashboardController {
     ];
   }
 
-  // Download CV logic
+  // Download CV logic - Opens Google Drive link
   Future<void> downloadCV() async {
-    // Read the PDF file from assets
-    final ByteData data = await rootBundle
-        .load('assets/Aizan Sagheer Flutter developer resume.pdf');
-    final List<int> bytes = data.buffer.asUint8List();
-
-    // Create the blob
-    final blob = html.Blob([bytes], 'application/pdf');
-    final url = html.Url.createObjectUrlFromBlob(blob);
-    final anchor = html.AnchorElement()
-      ..href = url
-      ..style.display = 'none'
-      ..download = 'Aizan_Sagheer_Flutter_Developer_Resume.pdf';
-
-    html.document.body?.children.add(anchor);
-    anchor.click();
-    html.document.body?.children.remove(anchor);
-    html.Url.revokeObjectUrl(url);
+    final Uri cvUri = Uri.parse(ExternalLinks.cvDriveLink);
+    
+    if (await canLaunchUrl(cvUri)) {
+      await launchUrl(
+        cvUri,
+        mode: LaunchMode.externalApplication,
+      );
+    } else {
+      throw Exception('Could not open CV link');
+    }
   }
 }
