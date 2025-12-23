@@ -36,53 +36,64 @@ class DashboardController {
 
    List<PortfolioProject> getProjects() {
     return [
-      PortfolioProject(
-        imagePath: AppImages.library,
-        projectName: 'Solar Digital Library',
-        description:
-            'A comprehensive digital library platform enabling users to access, organize, and read thousands of e-books and research papers. Features include advanced search, personalized recommendations, offline reading, and seamless syncing across devices for students and professionals.',
-      ),
-      PortfolioProject(
-        imagePath: AppImages.food,
-        projectName: 'FoodieGo - Food Delivery App',
-        description:
-            'A modern food delivery application connecting users with local restaurants and cafes. Includes real-time order tracking, secure payments, user reviews, and a loyalty rewards system. Built with scalable architecture for high-traffic environments.',
-      ),
-      PortfolioProject(
-        imagePath: AppImages.task,
-        projectName: 'ZALWA Task Manager',
-        description:
-            'A productivity and collaboration tool for teams to manage projects, assign tasks, and track progress. Features Kanban boards, real-time notifications, file sharing, and integrations with Slack and Google Calendar.',
-      ),
-      PortfolioProject(
-        imagePath: AppImages.travel,
-        projectName: 'TravelNest - Vacation Planner',
-        description:
-            'An intuitive vacation planning app that helps users discover destinations, create itineraries, and book hotels and activities. Includes AI-powered suggestions, budget tracking, and collaborative trip planning for groups.',
-      ),
-      PortfolioProject(
-        imagePath: AppImages.education,
-        projectName: 'EduConnect LMS',
-        description:
-            'A learning management system for schools and universities, offering course management, interactive lessons, quizzes, and analytics dashboards for educators. Supports video lectures, discussion forums, and student progress tracking.',
-      ),
-      PortfolioProject(
-        imagePath: AppImages.wellness,
-        projectName: 'FitTrack Wellness',
-        description:
-            'A health and fitness tracking app that monitors workouts, nutrition, and sleep patterns. Provides personalized fitness plans, progress charts, and integration with wearable devices for holistic wellness management.',
-      ),
-      PortfolioProject(
-        imagePath: AppImages.garden,
-        projectName: 'GreenThumb - Smart Gardening',
-        description:
-            'A smart gardening assistant app that helps users monitor plant health, schedule watering, and receive gardening tips. Integrates with IoT sensors for real-time soil and weather data.',
-      ),
+      // E-commerce Platform
       PortfolioProject(
         imagePath: AppImages.wallet,
-        projectName: 'SafePay Wallet',
+        projectName: 'Afrikwave E-Commerce Platform',
         description:
-            'A secure digital wallet for managing payments, transfers, and budgeting. Includes biometric authentication, transaction analytics, bill reminders, and support for multiple currencies and payment methods.',
+            'A comprehensive e-commerce solution with separate user and seller applications. Features include product browsing, shopping cart, secure payments, order management, seller dashboard, inventory management, analytics, and real-time notifications. Built for scalability and high-performance transactions.',
+        appLinks: [
+          'https://play.google.com/store/apps/details?id=com.afrikwave.userapp',
+          'https://play.google.com/store/apps/details?id=com.afrikwave.sellerapp',
+        ],
+      ),
+      
+      // Hair Salon Booking App
+      PortfolioProject(
+        imagePath: AppImages.task,
+        projectName: 'CareChair - Hair Salon Booking',
+        description:
+            'A complete salon management system with customer booking app and owner management panel. Customers can book appointments, view services, manage their profile, and receive notifications. Salon owners can manage appointments, staff, services, customer database, and generate business analytics reports.',
+        appLinks: [
+          'https://play.google.com/store/apps/details?id=com.carechair.panel_customer',
+          'https://play.google.com/store/apps/details?id=com.carechair.panel_owner',
+        ],
+      ),
+      
+      // Healthcare Appointment App
+      PortfolioProject(
+        imagePath: AppImages.wellness,
+        projectName: 'Doctor Appointment & Telemedicine',
+        description:
+            'A healthcare platform connecting patients with doctors through appointments, video consultations, and messaging. Patients can search for doctors, book appointments, have video calls, and chat with healthcare providers. Doctors can manage their schedule, conduct video consultations, and communicate with patients through an integrated messaging system.',
+        appLinks: [
+          'https://play.google.com/store/apps/details?id=app.patient.doctors',
+          'https://play.google.com/store/apps/details?id=app.doctors.doctor',
+        ],
+      ),
+      
+      // Health & Fitness App
+      PortfolioProject(
+        imagePath: AppImages.wellness,
+        projectName: 'Ring of Well - Health & Fitness',
+        description:
+            'An advanced health and fitness application featuring 3D exercise modeling for interactive workout guidance. Users can follow detailed 3D animated exercise demonstrations, track their fitness progress, create personalized workout plans, and monitor their health metrics. The app provides immersive visual guidance for proper exercise form and technique.',
+        appLinks: [
+          'https://play.google.com/store/apps/details?id=com.hollysoft.ringofwell1',
+        ],
+      ),
+      
+      // Precious Metals Trading Apps
+      PortfolioProject(
+        imagePath: AppImages.wallet,
+        projectName: 'Precious Metals Trading Platform',
+        description:
+            'A suite of financial applications for tracking live rates of copper, gold, and other precious metals. Features include real-time price updates, market analytics, price alerts, historical charts, and trading tools. Available in multiple variants (ZelatoFX, Ceekay, Manthoora) tailored for different markets and user preferences.',
+        appLinks: [
+          'https://play.google.com/store/apps/details?id=com.adrobz.zelatofx',
+          'https://play.google.com/store/apps/details?id=com.adrobz.ceekay',
+          'https://play.google.com/store/apps/details?id=com.adrobz.manthoora',
+        ],
       ),
     ];
   }

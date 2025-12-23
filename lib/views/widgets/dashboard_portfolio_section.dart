@@ -34,6 +34,7 @@ class DashboardPortfolioSection extends StatelessWidget {
                   imagePath: project.imagePath,
                   projectName: project.projectName,
                   description: project.description,
+                  appLinks: project.appLinks,
                 ),
             ],
           ),

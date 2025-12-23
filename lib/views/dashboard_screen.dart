@@ -34,7 +34,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final GlobalKey aboutKey = GlobalKey();
   final GlobalKey portfolioKey = GlobalKey();
   final GlobalKey contactKey = GlobalKey();
-  bool isDownloading = false;
+  final ValueNotifier<bool> isDownloadingNotifier = ValueNotifier(false);
 
   void scrollToSection(GlobalKey key) {
     final context = key.currentContext;
@@ -48,9 +48,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> downloadCV() async {
-    setState(() {
-      isDownloading = true;
-    });
+    isDownloadingNotifier.value = true;
     try {
       await _controller.downloadCV();
     } catch (e) {
@@ -61,14 +59,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       );
     } finally {
-      setState(() {
-        isDownloading = false;
-      });
+      isDownloadingNotifier.value = false;
     }
   }
 
   @override
   void dispose() {
+    isDownloadingNotifier.dispose();
     _scrollController.dispose();
     _skillsScrollController.dispose();
     _portfolioScrollController.dispose();
@@ -174,10 +171,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             SizedBox(height: 20),
                             SocialIconsRow(),
                             SizedBox(height: 30),
-                            CustomOutlinedButton(
-                              text: 'Download CV',
-                              onPressed: downloadCV,
-                              isLoading: isDownloading,
+                            ValueListenableBuilder<bool>(
+                              valueListenable: isDownloadingNotifier,
+                              builder: (context, isDownloading, _) {
+                                return CustomOutlinedButton(
+                                  text: 'Download CV',
+                                  onPressed: downloadCV,
+                                  isLoading: isDownloading,
+                                );
+                              },
                             ),
                             SizedBox(height: 30),
                             Container(
@@ -320,6 +322,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               imagePath: project.imagePath,
                               projectName: project.projectName,
                               description: project.description,
+                              appLinks: project.appLinks,
                             ),
                         ],
                       ),
@@ -443,10 +446,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 SocialIconsRow(),
                 // 4. Download CV Button
                 SizedBox(height: 16),
-                CustomOutlinedButton(
-                  text: 'Download CV',
-                  onPressed: downloadCV,
-                  isLoading: isDownloading,
+                ValueListenableBuilder<bool>(
+                  valueListenable: isDownloadingNotifier,
+                  builder: (context, isDownloading, _) {
+                    return CustomOutlinedButton(
+                      text: 'Download CV',
+                      onPressed: downloadCV,
+                      isLoading: isDownloading,
+                    );
+                  },
                 ),
                 // 5. Stats Row
                 SizedBox(height: 16),
@@ -576,6 +584,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         imagePath: project.imagePath,
                         projectName: project.projectName,
                         description: project.description,
+                        appLinks: project.appLinks,
                       ),
                       const SizedBox(
                           width: 16), // Add horizontal space between items

@@ -18,47 +18,60 @@ class CustomOutlinedButton extends StatefulWidget {
 }
 
 class _CustomOutlinedButtonState extends State<CustomOutlinedButton> {
-  bool isHovered = false;
+  final ValueNotifier<bool> isHoveredNotifier = ValueNotifier(false);
+
+  @override
+  void dispose() {
+    isHoveredNotifier.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (_) => setState(() => isHovered = true),
-      onExit: (_) => setState(() => isHovered = false),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: AppColors().textColor.withOpacity(0.5),
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: TextButton(
-          onPressed: widget.isLoading ? null : widget.onPressed,
-          style: TextButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-            shape: RoundedRectangleBorder(
+      onEnter: (_) => isHoveredNotifier.value = true,
+      onExit: (_) => isHoveredNotifier.value = false,
+      child: ValueListenableBuilder<bool>(
+        valueListenable: isHoveredNotifier,
+        builder: (context, isHovered, _) {
+          return Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors().textColor.withOpacity(0.5),
+                width: 1,
+              ),
               borderRadius: BorderRadius.circular(6),
             ),
-          ),
-          child: widget.isLoading
-              ? SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: AppColors().textColor,
-                  ),
-                )
-              : Text(
-                  widget.text,
-                  style: TextStyle(
-                    color: isHovered ? Colors.white : AppColors().textColor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
+            child: TextButton(
+              onPressed: widget.isLoading ? null : widget.onPressed,
+              style: TextButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
                 ),
-        ),
+              ),
+              child: widget.isLoading
+                  ? SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: AppColors().textColor,
+                      ),
+                    )
+                  : Text(
+                      widget.text,
+                      style: TextStyle(
+                        color:
+                            isHovered ? Colors.white : AppColors().textColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+            ),
+          );
+        },
       ),
     );
   }

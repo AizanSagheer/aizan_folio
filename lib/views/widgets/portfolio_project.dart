@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../utils/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PortfolioProject extends StatefulWidget {
   final String imagePath;
   final String projectName;
   final String description;
+  final List<String>? appLinks;
 
   const PortfolioProject({
     super.key,
     required this.imagePath,
     required this.projectName,
     required this.description,
+    this.appLinks,
   });
 
   @override
@@ -20,9 +23,10 @@ class PortfolioProject extends StatefulWidget {
 
 class _PortfolioProjectState extends State<PortfolioProject>
     with SingleTickerProviderStateMixin {
-  bool _isHovered = false;
   late AnimationController _controller;
   late Animation<double> _animation;
+  final ValueNotifier<bool> _isHoveredNotifier = ValueNotifier(false);
+  late final VoidCallback _hoverListener;
 
   @override
   void initState() {
@@ -35,26 +39,30 @@ class _PortfolioProjectState extends State<PortfolioProject>
       parent: _controller,
       curve: Curves.easeInOut,
     ));
+    _hoverListener = () {
+      if (_isHoveredNotifier.value) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    };
+    _isHoveredNotifier.addListener(_hoverListener);
   }
 
   @override
   void dispose() {
+    _isHoveredNotifier.removeListener(_hoverListener);
+    _isHoveredNotifier.dispose();
     _controller.dispose();
     super.dispose();
   }
 
   void _onEnter(PointerEvent details) {
-    setState(() {
-      _isHovered = true;
-      _controller.forward();
-    });
+    _isHoveredNotifier.value = true;
   }
 
   void _onExit(PointerEvent details) {
-    setState(() {
-      _isHovered = false;
-      _controller.reverse();
-    });
+    _isHoveredNotifier.value = false;
   }
 
   @override
@@ -150,19 +158,65 @@ class _PortfolioProjectState extends State<PortfolioProject>
           ),
         ],
       ),
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Text(
-            widget.description,
-            style: TextStyle(
-              color: AppColors().whiteColor,
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: SingleChildScrollView(
+                child: Text(
+                  widget.description,
+                  style: TextStyle(
+                    color: AppColors().whiteColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
-            textAlign: TextAlign.center,
           ),
-        ),
+          if (widget.appLinks != null && widget.appLinks!.isNotEmpty) ...[
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                alignment: WrapAlignment.center,
+                children: widget.appLinks!.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final link = entry.value;
+                  return ElevatedButton(
+                    onPressed: () async {
+                      final Uri uri = Uri.parse(link);
+                      if (await canLaunchUrl(uri)) {
+                        await launchUrl(
+                          uri,
+                          mode: LaunchMode.externalApplication,
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors().whiteColor,
+                      foregroundColor: AppColors().secondaryColor,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                    ),
+                    child: Text(
+                      widget.appLinks!.length > 1
+                          ? 'App ${index + 1}'
+                          : 'View App',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }
