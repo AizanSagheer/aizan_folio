@@ -106,12 +106,30 @@ class _PortfolioProjectState extends State<PortfolioProject>
           // Image
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: SvgPicture.asset(
-              widget.imagePath,
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
-            ),
+            child: widget.imagePath.endsWith('.svg')
+                ? SvgPicture.asset(
+                    widget.imagePath,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    widget.imagePath,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      // Fallback to a placeholder if image fails to load
+                      return Container(
+                        color: AppColors().containerBackgroundColor,
+                        child: Icon(
+                          Icons.image_not_supported,
+                          color: AppColors().whiteColor,
+                          size: 50,
+                        ),
+                      );
+                    },
+                  ),
           ),
           // Project Name Container at bottom
           Positioned(
@@ -184,39 +202,63 @@ class _PortfolioProjectState extends State<PortfolioProject>
                 spacing: 8,
                 runSpacing: 8,
                 alignment: WrapAlignment.center,
-                children: widget.appLinks!.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final link = entry.value;
-                  return ElevatedButton(
-                    onPressed: () async {
-                      final Uri uri = Uri.parse(link);
-                      if (await canLaunchUrl(uri)) {
-                        await launchUrl(
-                          uri,
-                          mode: LaunchMode.externalApplication,
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors().whiteColor,
-                      foregroundColor: AppColors().secondaryColor,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                    ),
-                    child: Text(
-                      widget.appLinks!.length > 1
-                          ? 'App ${index + 1}'
-                          : 'View App',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  );
+                children: widget.appLinks!.map((link) {
+                  return _buildPlatformIconButton(link);
                 }).toList(),
               ),
             ),
           ],
         ],
+      ),
+    );
+  }
+
+  Widget _buildPlatformIconButton(String link) {
+    final isPlayStore = link.contains('play.google.com');
+    final isAppStore = link.contains('apps.apple.com');
+    
+    IconData iconData;
+    String tooltip;
+    
+    if (isPlayStore) {
+      iconData = Icons.android;
+      tooltip = 'Google Play Store';
+    } else if (isAppStore) {
+      iconData = Icons.phone_iphone;
+      tooltip = 'App Store';
+    } else {
+      iconData = Icons.link;
+      tooltip = 'View App';
+    }
+    
+    return Tooltip(
+      message: tooltip,
+      child: Material(
+        color: AppColors().whiteColor,
+        borderRadius: BorderRadius.circular(8),
+        child: InkWell(
+          onTap: () async {
+            final Uri uri = Uri.parse(link);
+            if (await canLaunchUrl(uri)) {
+              await launchUrl(
+                uri,
+                mode: LaunchMode.externalApplication,
+              );
+            }
+          },
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              iconData,
+              color: AppColors().secondaryColor,
+              size: 24,
+            ),
+          ),
+        ),
       ),
     );
   }

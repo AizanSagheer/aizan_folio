@@ -23,7 +23,7 @@ class ProfilePhotoWithCircle extends StatelessWidget {
         ),
         child: ClipOval(
           child: Image.asset(
-            AppImages.aizan,
+            AppImages.aizanSmiling,
             width: circleSize,
             height: circleSize,
             fit: BoxFit.contain,

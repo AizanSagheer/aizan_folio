@@ -11,6 +11,18 @@ class DashboardPortfolioSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Group projects by category
+    final Map<String, List<model.PortfolioProject>> groupedProjects = {};
+    final List<model.PortfolioProject> uncategorizedProjects = [];
+    
+    for (final project in projects) {
+      if (project.category != null && project.category!.isNotEmpty) {
+        groupedProjects.putIfAbsent(project.category!, () => []).add(project);
+      } else {
+        uncategorizedProjects.add(project);
+      }
+    }
+    
     return Column(
       children: [
         Center(
@@ -24,18 +36,54 @@ class DashboardPortfolioSection extends StatelessWidget {
         SizedBox(height: 40.0),
         Container(
           key: portfolioKey,
-          child: Wrap(
-            spacing: 20.0,
-            runSpacing: 20.0,
-            alignment: WrapAlignment.center,
+          child: Column(
             children: [
-              for (final project in projects)
-                PortfolioProject(
-                  imagePath: project.imagePath,
-                  projectName: project.projectName,
-                  description: project.description,
-                  appLinks: project.appLinks,
+              // Render uncategorized projects first
+              if (uncategorizedProjects.isNotEmpty)
+                Wrap(
+                  spacing: 20.0,
+                  runSpacing: 20.0,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    for (final project in uncategorizedProjects)
+                      PortfolioProject(
+                        imagePath: project.imagePath,
+                        projectName: project.projectName,
+                        description: project.description,
+                        appLinks: project.appLinks,
+                      ),
+                  ],
                 ),
+              
+              // Render categorized projects with category headers
+              for (final entry in groupedProjects.entries) ...[
+                SizedBox(height: uncategorizedProjects.isNotEmpty || groupedProjects.keys.first != entry.key ? 40.0 : 0),
+                Center(
+                  child: Text(
+                    entry.key,
+                    style: TextStyle(
+                      color: AppColors().whiteColor,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 20.0),
+                Wrap(
+                  spacing: 20.0,
+                  runSpacing: 20.0,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    for (final project in entry.value)
+                      PortfolioProject(
+                        imagePath: project.imagePath,
+                        projectName: project.projectName,
+                        description: project.description,
+                        appLinks: project.appLinks,
+                      ),
+                  ],
+                ),
+              ],
             ],
           ),
         ),
