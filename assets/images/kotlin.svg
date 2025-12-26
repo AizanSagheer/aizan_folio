@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 96 96" id="Kotlin-Icon--Streamline-Svg-Logos" height="24" width="24">
+  <desc>
+    Kotlin Icon Streamline Icon: https://streamlinehq.com
+  </desc>
+  <path fill="url(#a)" d="M95 95H1V1h94L48 47.9812 95 95Z"></path>
+  <defs>
+    <linearGradient id="a" x1="9400.15" x2="1.936" y1="-.008" y2="9401.96" gradientUnits="userSpaceOnUse">
+      <stop offset=".003" stop-color="#e44857"></stop>
+      <stop offset=".469" stop-color="#c711e1"></stop>
+      <stop offset="1" stop-color="#7f52ff"></stop>
+    </linearGradient>
+  </defs>
+</svg>
