@@ -52,8 +52,11 @@ class _SkillItemState extends State<SkillItem>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return SizedBox(
+      width: 170,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
         VisibilityDetector(
           key: Key(widget.skillName),
           onVisibilityChanged: _onVisibilityChanged,
@@ -109,7 +112,8 @@ class _SkillItemState extends State<SkillItem>
             fontWeight: FontWeight.w500,
           ),
         ),
-      ],
+        ],
+      ),
     );
   }
 }

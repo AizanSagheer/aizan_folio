@@ -4,6 +4,7 @@ import '../controllers/dashboard_controller.dart';
 import '../utils/colors.dart';
 import '../utils/external_links.dart';
 import '../utils/images.dart';
+import '../models/portfolio_project.dart' as model;
 import 'widgets/contact_form_widget.dart';
 import 'widgets/footer_widget.dart';
 import 'widgets/app_bar.dart';
@@ -61,6 +62,114 @@ class _DashboardScreenState extends State<DashboardScreen> {
     } finally {
       isDownloadingNotifier.value = false;
     }
+  }
+
+  Widget _buildPortfolioWithCategories(List<model.PortfolioProject> projects) {
+    // Group projects by category
+    final Map<String, List<model.PortfolioProject>> groupedProjects = {};
+    final List<model.PortfolioProject> uncategorizedProjects = [];
+    
+    for (final project in projects) {
+      if (project.category != null && project.category!.isNotEmpty) {
+        groupedProjects.putIfAbsent(project.category!, () => []).add(project);
+      } else {
+        uncategorizedProjects.add(project);
+      }
+    }
+    
+    return Column(
+      children: [
+        // Render uncategorized projects first
+        if (uncategorizedProjects.isNotEmpty)
+          Wrap(
+            spacing: 20,
+            runSpacing: 20,
+            alignment: WrapAlignment.center,
+            children: [
+              for (final project in uncategorizedProjects)
+                PortfolioProject(
+                  imagePath: project.imagePath,
+                  projectName: project.projectName,
+                  description: project.description,
+                  appLinks: project.appLinks,
+                ),
+            ],
+          ),
+        
+        // Render categorized projects with category headers
+        for (final entry in groupedProjects.entries) ...[
+          SizedBox(height: uncategorizedProjects.isNotEmpty || groupedProjects.keys.first != entry.key ? 40 : 0),
+          Center(
+            child: Text(
+              entry.key,
+              style: TextStyle(
+                color: AppColors().whiteColor,
+                fontSize: 24,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Wrap(
+            spacing: 20,
+            runSpacing: 20,
+            alignment: WrapAlignment.center,
+            children: [
+              for (final project in entry.value)
+                PortfolioProject(
+                  imagePath: project.imagePath,
+                  projectName: project.projectName,
+                  description: project.description,
+                  appLinks: project.appLinks,
+                ),
+            ],
+          ),
+        ],
+      ],
+    );
+  }
+
+  List<Widget> _buildPortfolioHorizontalList(List<model.PortfolioProject> projects) {
+    // For horizontal scroll, we'll show all projects but group them visually
+    // Group projects by category
+    final Map<String, List<model.PortfolioProject>> groupedProjects = {};
+    final List<model.PortfolioProject> uncategorizedProjects = [];
+    
+    for (final project in projects) {
+      if (project.category != null && project.category!.isNotEmpty) {
+        groupedProjects.putIfAbsent(project.category!, () => []).add(project);
+      } else {
+        uncategorizedProjects.add(project);
+      }
+    }
+    
+    final List<Widget> widgets = [];
+    
+    // Add uncategorized projects
+    for (final project in uncategorizedProjects) {
+      widgets.add(PortfolioProject(
+        imagePath: project.imagePath,
+        projectName: project.projectName,
+        description: project.description,
+        appLinks: project.appLinks,
+      ));
+      widgets.add(const SizedBox(width: 16));
+    }
+    
+    // Add categorized projects
+    for (final entry in groupedProjects.entries) {
+      for (final project in entry.value) {
+        widgets.add(PortfolioProject(
+          imagePath: project.imagePath,
+          projectName: project.projectName,
+          description: project.description,
+          appLinks: project.appLinks,
+        ));
+        widgets.add(const SizedBox(width: 16));
+      }
+    }
+    
+    return widgets;
   }
 
   @override
@@ -309,23 +418,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           )),
                     ),
                     SizedBox(height: 40),
-                    // Portfolio Section
+                    // Portfolio Section with Category Grouping
                     Container(
                       key: portfolioKey,
-                      child: Wrap(
-                        spacing: 20,
-                        runSpacing: 20,
-                        alignment: WrapAlignment.center,
-                        children: [
-                          for (final project in projects)
-                            PortfolioProject(
-                              imagePath: project.imagePath,
-                              projectName: project.projectName,
-                              description: project.description,
-                              appLinks: project.appLinks,
-                            ),
-                        ],
-                      ),
+                      child: _buildPortfolioWithCategories(projects),
                     ),
                     SizedBox(height: 40),
                     // Contact Section
@@ -578,18 +674,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     thickness: MaterialStateProperty.all(8),
                     radius: const Radius.circular(8),
                   ),
-                  children: [
-                    for (final project in projects) ...[
-                      PortfolioProject(
-                        imagePath: project.imagePath,
-                        projectName: project.projectName,
-                        description: project.description,
-                        appLinks: project.appLinks,
-                      ),
-                      const SizedBox(
-                          width: 16), // Add horizontal space between items
-                    ],
-                  ],
+                  children: _buildPortfolioHorizontalList(projects),
                 ),
                 SizedBox(height: 32),
                 ContactSection(contactKey: contactKey),
